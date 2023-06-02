@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         val labels = ArrayList<String>()
 
         for(i in 0 until receivedData?.data?.size!!){
-            val data = receivedData.data[i]
+            val data = receivedData.data[receivedData.data.size-1-i]
             //Here we add the temperature data to the entries
             entries_temp.add(Entry(i.toFloat(), data.T.toFloat()/100))
             //Here we add the ambient light data to the entries
@@ -130,9 +130,9 @@ class MainActivity : AppCompatActivity() {
         //Adds the timestamps to the X axis of both charts
         val xAxisTemp = binding.tempChart.xAxis
         val xAxisLight = binding.lightChart.xAxis
-        val list = labels.toMutableList().apply { reverse() }
-        xAxisTemp.valueFormatter = IndexAxisValueFormatter(list)
-        xAxisLight.valueFormatter = IndexAxisValueFormatter(list)
+        //val list = labels.toMutableList().apply { reverse() }
+        xAxisTemp.valueFormatter = IndexAxisValueFormatter(labels)
+        xAxisLight.valueFormatter = IndexAxisValueFormatter(labels)
 
 
         binding.tempChart.invalidate()
